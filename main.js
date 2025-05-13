@@ -1,10 +1,11 @@
+
 let cells=[];
 let bias=[1,1,0,0,0,0,0,0,0];
-let w=5;
+let w=2;
 
 function setup(){
     frameRate(25);
-    createCanvas(910,810);
+    createCanvas(250,250);
     let total= width/w;
 
     for (let i=0;i<total;i++){
@@ -24,7 +25,8 @@ function draw(){
         
         for (j=0; j<len;j++){
             noStroke();
-            fill(255-cells[i][j]*255);
+            //uncomment for flipped colors
+            fill(/*255-*/cells[i][j]*255);
             square(i*w,j*w,w);
         }
     }

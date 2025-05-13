@@ -1,11 +1,11 @@
 
 let cells=[];
 let bias=[1,0,0,0,0,0,0,0,0];
-let w=2;
+let w=1;
 
 function setup(){
-    frameRate(25);
-    createCanvas(250,250);
+    frameRate(35);
+    createCanvas(200,200);
     let total= width/w;
     //setting up 2d
     for (let i=0;i<total;i++){
@@ -32,7 +32,7 @@ function draw(){
         
         for (let j=0; j<len;j++){
             noStroke();
-            //uncomment for flipped colors
+            //uncomment for flipped scheme
             fill(/*255-*/cells[i][j][0]*255);
             square(i*w,j*w,w);
         }
@@ -106,8 +106,8 @@ function changeState(upLeft,upMid,upRight,left,current,right,botLeft,botMid,botR
 
     //if more than 3 neighbors harm by overcrowding
     else if((neighborval)>3){
-        //stress from overcrowding (not instant death)
-        newAge=newAge-1*(neighborval-3);
+        //stress from overcrowding (removed for now)
+        newAge=newAge-0*(neighborval-3);
         //if alive still
         if (newAge>0){
             return [1,newAge];
@@ -126,9 +126,30 @@ function changeState(upLeft,upMid,upRight,left,current,right,botLeft,botMid,botR
     else if((neighborval)==2 && current==1 &&newAge>0){
         return [1,newAge];
     }
-    //no neighbor
-    else{
-        return [0,0];
+
+
+    //1 neighbor
+    else if(neighborval==1&&current==1){
+        newAge-=50;
+        if (newAge<1){
+            return [0,0];
+        }
+        else{
+            return [1,newAge];
+        }
     }
+
+    //0 neighbor
+    else if(neighborval==0&&current==1){
+        newAge-=99;
+        if (newAge<1){
+            return [0,0];
+        }
+        else{
+            return [1,newAge];
+        }
+    }
+
+    else return [0,0]
     
 }
