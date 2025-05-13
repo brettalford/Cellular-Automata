@@ -1,10 +1,10 @@
 let cells=[];
 let bias=[1,0,0,0,0,0,0,0,0];
-let w=5;
+let w=3;
 
 function setup(){
-    frameRate(15);
-    createCanvas(910,810);
+    frameRate(25);
+    createCanvas(600,609);
     let total= width/w;
     //setting up 2d
     for (let i=0;i<total;i++){
@@ -105,7 +105,7 @@ function changeState(upLeft,upMid,upRight,left,current,right,botLeft,botMid,botR
     //if more than 3 neighbors harm by overcrowding
     else if((neighborval)>3){
         //stress from overcrowding (not instant death)
-        newAge=newAge-15*(neighborval-3);
+        newAge=newAge-1*(neighborval-3);
         //if alive still
         if (newAge>0){
             return [1,newAge];
@@ -124,7 +124,7 @@ function changeState(upLeft,upMid,upRight,left,current,right,botLeft,botMid,botR
     else if((neighborval)==2 && current==1 &&newAge>0){
         return [1,newAge];
     }
-    
+    //no neighbor
     else{
         return [0,0];
     }
